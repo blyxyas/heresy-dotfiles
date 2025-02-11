@@ -64,9 +64,13 @@ vim.keymap.set("i", "<C-S-k>", "<cmd>:norm! dd<cr>") -- Delete whole line
 vim.keymap.set("i", "<C-/>", "<cmd>:norm gcc<cr>") -- Comment & Uncomment
 vim.keymap.set("i", "<C-p>", "<cmd>:Telescope find_files<cr>") -- Find file
 vim.keymap.set("i", "<C-c>", "<cmd>:norm! yy<cr>") -- Copy whole line
-vim.keymap.set("i", "<C-v>", "<cmd>:r !xclip -o -sel -c<cr>") -- Paste copied, from OS
+vim.keymap.set("i", "<C-v>", '<C-r>=system("xclip -o -sel -c")<cr>') -- Paste copied, from OS
+vim.keymap.set("i", "<A-Down>", "<cmd>:norm! ddp<cr>")
+vim.keymap.set("i", "<A-Up>", "<cmd>:norm! ddkP<cr>")
+
 
 vim.keymap.set("v", "<BS>", "d") -- Delete selected
+-- I couldn't manage to do Copy to OS, you'll have to use the filthy <C-S-v> (Control + Shift + V) 
 
 for i = 1, #keys do
     vim.keymap.set("n", keys[i], "i") -- Every key in normal mode leads to insert.
