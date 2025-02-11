@@ -59,11 +59,20 @@ local keys = {
 }
 
 
-vim.api.nvim_feedkeys("i", "n", false)
+vim.api.nvim_feedkeys("i", "n", false) -- Start in insert mode
 vim.keymap.set("i", "<C-S-k>", "<cmd>:norm! dd<cr>") -- Delete whole line
 vim.keymap.set("i", "<C-/>", "<cmd>:norm gcc<cr>") -- Comment & Uncomment
 vim.keymap.set("i", "<C-p>", "<cmd>:Telescope find_files<cr>") -- Find file
+vim.keymap.set("i", "<C-c>", "<cmd>:norm! yy<cr>") -- Copy whole line
+vim.keymap.set("i", "<C-v>", "<cmd>:r !xclip -o -sel -c<cr>") -- Paste copied, from OS
+
+vim.keymap.set("v", "<BS>", "d") -- Delete selected
 
 for i = 1, #keys do
-    vim.keymap.set("n", keys[i], "i")
+    vim.keymap.set("n", keys[i], "i") -- Every key in normal mode leads to insert.
+    -- It's like hell, every path leads to pain
+
+    -- We could also unbind the keys in the other modes, but it's a little bit
+    -- pointless, as only get to those modes in controlled scenarios. You may
+    -- think you have freedom, but it's a mere ilusion
 end

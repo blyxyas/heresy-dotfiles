@@ -1,4 +1,8 @@
 require("keybinds")
+vim.opt.clipboard="unnamedplus" -- Need xclip, make sure to have xclip
+vim.opt.keymodel="startsel,stopsel"
+
+vim.wo.number = true
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
