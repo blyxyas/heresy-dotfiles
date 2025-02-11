@@ -58,15 +58,26 @@ local keys = {
     "Z",
 }
 
-
 vim.api.nvim_feedkeys("i", "n", false) -- Start in insert mode
 vim.keymap.set("i", "<C-S-k>", "<cmd>:norm! dd<cr>") -- Delete whole line
 vim.keymap.set("i", "<C-/>", "<cmd>:norm gcc<cr>") -- Comment & Uncomment
 vim.keymap.set("i", "<C-p>", "<cmd>:Telescope find_files<cr>") -- Find file
-vim.keymap.set("i", "<C-c>", "<cmd>:norm! yy<cr>") -- Copy whole line
+vim.keymap.set("i", "<C-c>", "<cmd>:norm! *yy<cr>") -- Copy whole line
 vim.keymap.set("i", "<C-v>", '<C-r>=system("xclip -o -sel -c")<cr>') -- Paste copied, from OS
 vim.keymap.set("i", "<A-Down>", "<cmd>:norm! ddp<cr>")
 vim.keymap.set("i", "<A-Up>", "<cmd>:norm! ddkP<cr>")
+
+vim.keymap.set("i", "<C-s>", "<cmd>:w!<cr>")
+vim.keymap.set("i", "<C-S-q>", "<cmd>:q<cr>")
+
+-- Support for multiple cursors
+
+-- vim.keymap.set("i", "<A-S-Up>", "<cmd>:MCstart<cr>")
+-- vim.keymap.set("i", "<A-S-Up>", function() mc.lineAddCursor(-1) end)
+-- vim.keymap.set("i", "<A-S-Up>", function() mc.lineAddCursor(-1) end)
+-- vim.keymap.set("i", "<A-S-Up>", function() mc.lineAddCursor(-1) end)
+-- vim.keymap.set("i", "<A-S-Up>", function() mc.lineAddCursor(-1) end)
+-- vim.keymap.set("i", "<A-S-Up>", function() mc.lineAddCursor(-1) end)
 
 
 vim.keymap.set("v", "<BS>", "d") -- Delete selected

@@ -1,8 +1,4 @@
 require("keybinds")
-vim.opt.clipboard="unnamedplus" -- Need xclip, make sure to have xclip
-vim.opt.keymodel="startsel,stopsel"
-
-vim.wo.number = true
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -27,13 +23,18 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+vim.opt.clipboard="unnamedplus" -- We need xclip, make sure to have xclip
+vim.opt.keymodel="startsel,stopsel"
+
+vim.wo.number = true
+
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
     {
   	'mrcjkb/rustaceanvim',
-  	version = '^5', -- Recommended
-  	lazy = false, -- This plugin is already lazy
+  	version = '^5',
+  	lazy = false,
     },
     {
       'numToStr/Comment.nvim',
@@ -45,6 +46,29 @@ require("lazy").setup({
       "nvim-telescope/telescope.nvim",
       tag = "0.1.8",
       dependencies = { "nvim-lua/plenary.nvim" }
+    },
+    -- {
+    --   "nvim-neo-tree/neo-tree.nvim",
+    --   branch = "v3.x",
+    --   dependencies = {
+    --     "nvim-lua/plenary.nvim",
+    --     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+    --     "MunifTanjim/nui.nvim",
+    --     -- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
+    --   }
+    -- },
+    {
+      "nvim-treesitter/nvim-treesitter",
+      build = ":TSUpdate",
+      config = function()
+        local configs = require("nvim-treesitter.configs")
+        configs.setup({
+          ensure_installed = { "c", "rust", "javascript", "html", "css", "bash", "diff", "json", "markdown", "markdown_inline", "toml", "typescript" },
+          highlight = { enable = true },
+          indent = { enable = true },
+          sync_install = true
+        })
+      end
     }
   },
   -- Configure any other settings here. See the documentation for more details.
